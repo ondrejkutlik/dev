@@ -1,25 +1,3 @@
-#!/usr/bin/env python3
-"""
-poker_bot.py - Texas Hold'em bot (No-Limit) zalozeny na pravdepodobnosti a EV.
-
-Obsah modulu:
-  1. Karty a hodnotenie ruk       (evaluate)
-  2. Preflop sila ruky            (chen_score, tabulka rozsahov)
-  3. Matematika pravdepodobnosti  (outs, pot odds, EV, MDF, GTO bluff ratio, Kelly, SPR)
-  4. Monte Carlo equity           (monte_carlo_equity)
-  5. Model supera                 (OpponentStats)
-  6. Rozhodovaci engine           (PokerBot)
-  7. Simulator hry heads-up       (play_hand, testovaci supери)
-  8. CLI                          (analyze / simulate / selftest)
-
-Pouzitie:
-  python poker_bot.py selftest
-  python poker_bot.py analyze --hole AsKd --board QhJc2s --pot 100 --to-call 40
-  python poker_bot.py simulate --hands 500 --opponent all
-
-POZOR: Kod je urceny na studium, simulacie a hru proti vlastnym botom.
-Vacsina online pokerovych siete pouzivanie botov zakazuje.
-"""
 from __future__ import annotations
 
 import argparse
@@ -31,9 +9,8 @@ import time
 from collections import Counter
 from dataclasses import dataclass
 
-# ---------------------------------------------------------------------------
 # 1. KARTY A HODNOTENIE RUK
-# ---------------------------------------------------------------------------
+
 RANKS = "23456789TJQKA"
 SUITS = "cdhs"
 ALL_CARDS = list(range(52))          # karta = rank (0..12) + 13 * farba (0..3)
@@ -99,9 +76,8 @@ def evaluate(cards: list[int]) -> tuple:
     return (0, *sorted(rc, reverse=True)[:5])
 
 
-# ---------------------------------------------------------------------------
-# 2. PREFLOP SILA RUKY (Chenov vzorec) A TABULKA ROZSAHOV
-# ---------------------------------------------------------------------------
+# 2. PREFLOP SILA RUKY A TABULKA ROZSAHOV
+
 def chen_score(c1: int, c2: int) -> int:
     """Chenov vzorec: AA = 20, 72o = -1. Rychle odhadne silu startovej ruky."""
     r1, r2 = c1 % 13, c2 % 13
@@ -132,9 +108,8 @@ def _build_range_table() -> list[tuple[int, int]]:
 RANGE_TABLE = _build_range_table()               # 1326 kombinacii od najsilnejsej
 
 
-# ---------------------------------------------------------------------------
 # 3. MATEMATIKA PRAVDEPODOBNOSTI A EV
-# ---------------------------------------------------------------------------
+
 def prob_hit_outs(outs: int, cards_to_come: int, unseen: int) -> float:
     """Hypergeometricke rozdelenie: P(aspon jeden out prisiel)."""
     if outs <= 0:
@@ -241,9 +216,8 @@ def draw_outs(hole: list[int], board: list[int]) -> int:
     return outs
 
 
-# ---------------------------------------------------------------------------
 # 4. MONTE CARLO EQUITY
-# ---------------------------------------------------------------------------
+
 def monte_carlo_equity(hole: list[int], board: list[int], n_opp: int = 1,
                        sims: int = 400, opp_range_pct: float | None = None,
                        rng: random.Random | None = None) -> float:
@@ -287,9 +261,8 @@ def monte_carlo_equity(hole: list[int], board: list[int], n_opp: int = 1,
     return total / sims
 
 
-# ---------------------------------------------------------------------------
 # 5. MODEL SUPERA
-# ---------------------------------------------------------------------------
+
 @dataclass
 class OpponentStats:
     """Bayesovsky vyhladene statistiky: VPIP, PFR, agresivita, fold-to-bet."""
@@ -322,9 +295,8 @@ class OpponentStats:
         return f"{tight}-{style}"
 
 
-# ---------------------------------------------------------------------------
 # 6. ROZHODOVACI ENGINE
-# ---------------------------------------------------------------------------
+
 class BasePlayer:
     name = "base"
 
@@ -492,9 +464,8 @@ class PokerBot(BasePlayer):
         return ("fold", 0)
 
 
-# ---------------------------------------------------------------------------
 # 7. SIMULATOR (HEADS-UP NO-LIMIT) A TESTOVACI SUPERI
-# ---------------------------------------------------------------------------
+
 class RandomBot(BasePlayer):
     name = "Random"
 
@@ -655,9 +626,8 @@ def simulate(hero: BasePlayer, villain: BasePlayer, hands: int, seed: int = 1,
                 win_rate=sum(r > 0 for r in results) / hands, total_bb=sum(results))
 
 
-# ---------------------------------------------------------------------------
 # 8. CLI
-# ---------------------------------------------------------------------------
+
 def self_test() -> None:
     e = lambda s: evaluate(parse_cards(s))
     assert e("AsKsQsJsTs2c3d")[0] == 8
