@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ondrejkutlik (Ondrej Kutlik)</title>
+<meta name="description" content="Python projects by Ondrej Kutlik">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" media="(prefers-color-scheme: light)">
+<style>
+:root{
+  --bg:#0d1117; --bg2:#010409; --surface:#151b23; --border:#3d444d; --border-muted:#3d444db3;
+  --fg:#f0f6fc; --muted:#9198a1; --accent:#4493f8; --btn:#212830; --btn-hover:#262c36;
+  --tab-active:#f78166; --c0:#151b23; --c1:#033a16; --c2:#196c2e; --c3:#2ea043; --c4:#56d364;
+  --py:#3572A5; --label:#3d444d;
+}
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#ffffff; --bg2:#f6f8fa; --surface:#f6f8fa; --border:#d1d9e0; --border-muted:#d1d9e0b3;
+    --fg:#1f2328; --muted:#59636e; --accent:#0969da; --btn:#f6f8fa; --btn-hover:#eff2f5;
+    --tab-active:#fd8c73; --c0:#eff2f5; --c1:#aceebb; --c2:#4ac26b; --c3:#2da44e; --c4:#116329;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+svg.i{width:16px;height:16px;fill:currentColor;vertical-align:text-bottom;flex:none}
+
+/* header */
+header{background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+.topbar{display:flex;align-items:center;gap:12px;padding:16px 16px 8px}
+.iconbtn{width:32px;height:32px;border:1px solid var(--border);border-radius:6px;background:transparent;color:var(--muted);display:grid;place-items:center}
+.mark{width:32px;height:32px;border-radius:50%;background:var(--fg);color:var(--bg);display:grid;place-items:center;font-weight:700;font-size:13px}
+.topbar .user{font-weight:600;color:var(--fg)}
+.topbar .spacer{flex:1}
+.search{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:6px;padding:0 8px;height:32px;color:var(--muted);width:260px;background:transparent}
+.search input{background:transparent;border:0;outline:0;color:var(--fg);font:inherit;width:100%}
+nav.tabs{display:flex;gap:8px;padding:0 16px;overflow-x:auto}
+nav.tabs a{display:flex;align-items:center;gap:8px;color:var(--fg);padding:8px 8px 10px;border-bottom:2px solid transparent;white-space:nowrap;border-radius:6px 6px 0 0}
+nav.tabs a:hover{text-decoration:none;background:var(--btn-hover)}
+nav.tabs a svg{color:var(--muted)}
+nav.tabs a.active{border-bottom-color:var(--tab-active);font-weight:600}
+.counter{background:var(--label);color:var(--fg);border-radius:2em;padding:0 6px;font-size:12px;font-weight:500;line-height:18px}
+@media (prefers-color-scheme: light){.counter{background:#818b981f}}
+
+/* layout */
+.container{max-width:1280px;margin:0 auto;padding:24px 32px;display:grid;grid-template-columns:296px 1fr;gap:24px}
+aside .avatar{width:100%;max-width:296px;aspect-ratio:1;border-radius:50%;border:1px solid var(--border);background:var(--surface);display:grid;place-items:center;overflow:hidden;font-size:96px;font-weight:600;color:var(--muted)}
+aside .avatar img{width:100%;height:100%;object-fit:cover}
+aside h1{margin:16px 0 0;font-size:24px;line-height:1.25;font-weight:600}
+aside .login{font-size:20px;font-weight:300;color:var(--muted);line-height:24px}
+aside .bio{margin:16px 0}
+.btn{display:block;width:100%;text-align:center;background:var(--btn);border:1px solid var(--border);color:var(--fg);border-radius:6px;padding:5px 16px;font-weight:500;margin:16px 0}
+.btn:hover{background:var(--btn-hover);text-decoration:none}
+.meta{list-style:none;padding:0;margin:0}
+.meta li{display:flex;gap:8px;align-items:center;margin:4px 0;color:var(--fg)}
+.meta li svg{color:var(--muted)}
+.meta .muted{color:var(--muted)}
+hr{border:0;border-top:1px solid var(--border-muted);margin:16px 0}
+aside h2{font-size:16px;font-weight:600;margin:0 0 8px}
+.langbar{display:flex;height:8px;border-radius:6px;overflow:hidden;margin:8px 0}
+.skills{display:flex;flex-wrap:wrap;gap:6px}
+.topic{background:#388bfd1a;color:var(--accent);border-radius:2em;padding:0 10px;font-size:12px;font-weight:500;line-height:22px}
+
+main,.contrib-wrap>div{min-width:0}
+main h2.section{font-size:16px;font-weight:400;margin:0 0 8px}
+.pinned{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.card{border:1px solid var(--border);border-radius:6px;padding:16px;display:flex;flex-direction:column;gap:8px;background:var(--bg);cursor:pointer}
+.card:hover{border-color:var(--muted)}
+.card .head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.card .head a{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.label{border:1px solid var(--border);border-radius:2em;color:var(--muted);font-size:12px;font-weight:500;padding:0 7px;line-height:18px}
+.card p{margin:0;color:var(--muted);font-size:12px;flex:1}
+.card .foot{display:flex;gap:16px;color:var(--muted);font-size:12px;align-items:center}
+.dot{width:12px;height:12px;border-radius:50%;display:inline-block;background:var(--py);border:1px solid #ffffff26;vertical-align:-1px;margin-right:2px}
+
+/* contributions */
+.contrib-wrap{display:grid;grid-template-columns:1fr auto;gap:24px}
+.contrib{border:1px solid var(--border);border-radius:6px;padding:12px 16px;overflow-x:auto}
+.cal{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,10px);gap:3px;min-width:max-content}
+.cal span{width:10px;height:10px;border-radius:2px;background:var(--c0);outline:1px solid #ffffff0d;outline-offset:-1px}
+.cal span[data-l="1"]{background:var(--c1)} .cal span[data-l="2"]{background:var(--c2)}
+.cal span[data-l="3"]{background:var(--c3)} .cal span[data-l="4"]{background:var(--c4)}
+.cal span.out{visibility:hidden}
+.months{display:grid;grid-auto-flow:column;grid-auto-columns:13px;font-size:12px;color:var(--muted);margin:0 0 4px 30px;min-width:max-content}
+.calrow{display:flex;gap:4px}
+.days{display:grid;grid-template-rows:repeat(7,10px);gap:3px;font-size:12px;color:var(--muted);width:26px;line-height:10px}
+.legend{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);margin-top:8px;gap:8px;flex-wrap:wrap}
+.legend .scale{display:flex;gap:3px;align-items:center}
+.legend .scale span{width:10px;height:10px;border-radius:2px}
+.years{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.years a{display:block;padding:6px 16px;border-radius:6px;color:var(--muted);font-size:12px}
+.years a.on{background:var(--accent);color:#fff}
+
+.activity{margin-top:24px}
+.activity h2{font-size:16px;font-weight:400;margin:0 0 8px}
+.month{font-size:12px;font-weight:600;display:flex;align-items:center;gap:8px;margin:16px 0}
+.month::after{content:"";flex:1;border-top:1px solid var(--border-muted)}
+.month span{color:var(--muted);font-weight:400}
+.tl{position:relative;padding-left:40px;padding-bottom:16px}
+.tl::before{content:"";position:absolute;left:15px;top:0;bottom:0;width:2px;background:var(--border-muted)}
+.tl .badge{position:absolute;left:0;top:0;width:32px;height:32px;border-radius:50%;background:var(--surface);border:2px solid var(--bg);display:grid;place-items:center;color:var(--muted)}
+.tl .title{font-size:16px;padding-top:4px}
+.tl ul{list-style:none;margin:8px 0 0;padding:0}
+.tl li{display:flex;justify-content:space-between;gap:12px;padding:4px 0;font-size:14px}
+.tl li .d{color:var(--muted);font-size:12px;white-space:nowrap}
+.empty{color:var(--muted);font-size:14px;border:1px solid var(--border);border-radius:6px;padding:16px;text-align:center}
+
+/* repo list */
+.filter{display:flex;gap:8px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border-muted)}
+.filter input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:5px 12px;color:var(--fg);font:inherit}
+.repo-row{padding:24px 0;border-bottom:1px solid var(--border-muted)}
+.repo-row h3{margin:0 0 4px;font-size:20px;font-weight:600;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.repo-row p{color:var(--muted);margin:0 0 8px}
+.repo-row .foot{display:flex;gap:16px;color:var(--muted);font-size:12px;flex-wrap:wrap}
+
+/* repo view */
+.repo-view{grid-column:1/-1}
+.crumb{font-size:20px;display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.crumb b{font-weight:600}
+.repo-desc{color:var(--muted);margin:0 0 16px}
+.box{border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:16px}
+.box-head{background:var(--surface);padding:8px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.box-head .grow{flex:1}
+.filelist a{display:flex;gap:8px;align-items:center;padding:8px 16px;border-top:1px solid var(--border-muted);color:var(--fg)}
+.filelist a:first-child{border-top:0}
+.filelist a svg{color:var(--muted)}
+.filelist a.on{background:var(--btn-hover)}
+.filelist .sz{margin-left:auto;color:var(--muted);font-size:12px}
+.readme{padding:16px 24px}
+.readme h3{margin:0 0 8px;font-size:20px;border-bottom:1px solid var(--border-muted);padding-bottom:8px}
+.readme code,.readme pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:85%;background:var(--surface);border-radius:6px}
+.readme code{padding:2px 5px}
+.readme pre{padding:12px 16px;overflow-x:auto}
+.readme pre code{padding:0;background:none}
+.code{overflow-x:auto;font:12px/20px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.code table{border-collapse:collapse;width:100%}
+.code td.n{width:1%;min-width:50px;padding:0 10px;text-align:right;color:var(--muted);user-select:none;vertical-align:top}
+.code td.l{padding:0 10px;white-space:pre}
+.code pre{margin:0}
+.hljs{background:transparent!important;padding:0!important}
+.smallbtn{background:var(--btn);border:1px solid var(--border);color:var(--fg);border-radius:6px;padding:3px 12px;font-size:12px;font-weight:500}
+.smallbtn:hover{background:var(--btn-hover);text-decoration:none}
+footer{max-width:1280px;margin:40px auto 0;padding:24px 32px 40px;border-top:1px solid var(--border-muted);color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+@media (max-width:1011px){.contrib-wrap{grid-template-columns:1fr}.years{flex-direction:row}}
+@media (max-width:767px){
+  .container{grid-template-columns:1fr;padding:16px}
+  aside{display:grid;grid-template-columns:72px 1fr;gap:0 16px;align-items:center}
+  aside .avatar{width:72px;font-size:28px}
+  aside .rest{grid-column:1/-1}
+  aside h1{margin:0;font-size:20px}
+  .pinned{grid-template-columns:1fr}
+  .search{display:none}
+  footer{padding:24px 16px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="topbar">
+    <span class="iconbtn" aria-hidden="true"><svg class="i" viewBox="0 0 16 16"><path d="M1 2.75A.75.75 0 0 1 1.75 2h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 2.75Zm0 5A.75.75 0 0 1 1.75 7h12.5a.75.75 0 0 1 0 1.5H1.75A.75.75 0 0 1 1 7.75ZM1.75 12h12.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5Z"/></svg></span>
+    <a href="#/" class="mark" aria-label="Home">OK</a>
+    <a href="#/" class="user" id="hdrLogin">ondrejkutlik</a>
+    <span class="spacer"></span>
+    <label class="search"><svg class="i" viewBox="0 0 16 16"><path d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 1 1-1.06 1.06ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"/></svg><input id="q" placeholder="Type to search projects" aria-label="Search projects"></label>
+  </div>
+  <nav class="tabs">
+    <a href="#/" data-tab="overview"><svg class="i" viewBox="0 0 16 16"><path d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"/></svg>Overview</a>
+    <a href="#/repositories" data-tab="repositories"><svg class="i" viewBox="0 0 16 16"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/></svg>Repositories <span class="counter" id="repoCount">6</span></a>
+    <a href="#/stars" data-tab="stars" id="ghLink"><svg class="i" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg>Stars</a>
+  </nav>
+</header>
+
+<div class="container" id="app"></div>
+
+<footer>
+  <span>© <span id="yr"></span> Ondrej Kutlik</span>
+  <span>Source code for every project lives in <a id="srcLink" href="https://github.com/ondrejkutlik/dev/tree/main/projects">/projects</a></span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+<script>
+const USER = "ondrejkutlik", REPO = "dev", BRANCH = "main";
+const GH = `https://github.com/${USER}/${REPO}`;
+
+const PROFILE = {
+  name: "Ondrej Kutlik", login: USER,
+  bio: "Python projects — games, tools and a poker bot built on probability & EV.",
+  avatar: `https://github.com/${USER}.png?size=460`,
+  location: "Slovakia", followers: 0, following: 0
+};
+
+const REPOS = [
+  { name: "poker-bot", desc: "Texas Hold'em (No-Limit) bot based on probability and expected value — hand evaluator, Monte Carlo equity, opponent modelling and a heads-up simulator.",
+    files: ["poker_bot.py"], topics: ["poker","monte-carlo","probability","cli"],
+    run: ["python poker_bot.py selftest", "python poker_bot.py analyze --hole AsKd --board QhJc2s --pot 100 --to-call 40", "python poker_bot.py simulate --hands 500 --opponent all"],
+    notes: ["Chen formula preflop hand strength and a 1326-combo range table", "Pot odds, EV, MDF, GTO bluff ratio, Kelly fraction, SPR", "Bayesian-smoothed opponent stats (VPIP, PFR, aggression, fold-to-bet)", "Test opponents: Random, Calling station, Maniac, Tight-aggressive"] },
+  { name: "piskvorky-5x5", desc: "Gomoku — five in a row on a 15 × 15 board. Play against the computer or a friend, with undo and a score counter (tkinter).",
+    files: ["piskvorky5x5.py"], topics: ["game","tkinter","gomoku"],
+    run: ["python piskvorky5x5.py"], notes: ["Computer move scores open and closed runs in all four directions", "Highlights the winning row and the last move"] },
+  { name: "kalkulacka", desc: "Calculator in two flavours — a command-line version with a regex parser and a tkinter GUI built as a state machine without eval().",
+    files: ["kalkulacka.py","kalkulacka_gui.py"], topics: ["calculator","tkinter","cli"],
+    run: ["python kalkulacka.py", "python kalkulacka_gui.py"], notes: ["CLI supports + − * / % ** and continuing from the last result", "GUI works with mouse and keyboard (digits, operators, Enter, Backspace, Esc)"] },
+  { name: "generator-hesiel", desc: "Secure password generator using the secrets module — CLI and a tkinter GUI with an entropy-based strength meter.",
+    files: ["generator_hesiel.py","generator_hesiel_gui.py"], topics: ["security","passwords","tkinter"],
+    run: ["python generator_hesiel.py", "python generator_hesiel_gui.py"], notes: ["Choose lowercase, uppercase, digits and special characters", "Strength shown in bits of entropy (length × log₂ alphabet size)"] },
+  { name: "piskvorky-3x3", desc: "Tic-tac-toe on a 3 × 3 board with a tkinter GUI — two players or against a simple computer.",
+    files: ["piskvorky3x3.py"], topics: ["game","tkinter","tic-tac-toe"],
+    run: ["python piskvorky3x3.py"], notes: ["Detects wins across rows, columns and diagonals"] },
+  { name: "faktorial", desc: "Factorial calculator with iterative and recursive implementations, cross-checked against math.factorial.",
+    files: ["faktorial.py"], topics: ["math","recursion","cli"],
+    run: ["python faktorial.py"], notes: ["Input validation for non-integers and negative numbers", "Skips recursion above n = 900 to stay under Python's recursion limit"] }
+];
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const ICON = {
+  repo: '<svg class="i" viewBox="0 0 16 16"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/></svg>',
+  file: '<svg class="i" viewBox="0 0 16 16"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V6h-2.75A1.75 1.75 0 0 1 9 4.25V1.5Zm6.75.062V4.25c0 .138.112.25.25.25h2.688l-.011-.013-2.914-2.914-.013-.011Z"/></svg>',
+  people: '<svg class="i" viewBox="0 0 16 16"><path d="M2 5.5a3.5 3.5 0 1 1 5.898 2.549 5.508 5.508 0 0 1 3.034 4.084.75.75 0 1 1-1.482.235 4 4 0 0 0-7.9 0 .75.75 0 0 1-1.482-.236A5.507 5.507 0 0 1 3.102 8.05 3.493 3.493 0 0 1 2 5.5ZM11 4a3.001 3.001 0 0 1 2.22 5.018 5.01 5.01 0 0 1 2.56 3.012.749.749 0 0 1-.885.954.752.752 0 0 1-.549-.514 3.507 3.507 0 0 0-2.522-2.372.75.75 0 0 1-.574-.73v-.352a.75.75 0 0 1 .416-.672A1.5 1.5 0 0 0 11 5.5.75.75 0 0 1 11 4Zm-5.5-.5a2 2 0 1 0-.001 3.999A2 2 0 0 0 5.5 3.5Z"/></svg>',
+  pin: '<svg class="i" viewBox="0 0 16 16"><path d="m12.596 11.596-3.535 3.536a1.5 1.5 0 0 1-2.122 0l-3.535-3.536a6.5 6.5 0 1 1 9.192-9.192 6.5 6.5 0 0 1 0 9.192Zm-1.06-8.132v-.001a5 5 0 1 0-7.072 7.072L8 14.07l3.536-3.534a5 5 0 0 0 0-7.072ZM8 9a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 9Z"/></svg>',
+  link: '<svg class="i" viewBox="0 0 16 16"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"/></svg>',
+  commit: '<svg class="i" viewBox="0 0 16 16"><path d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"/></svg>'
+};
+
+const cache = {};
+async function getText(path){
+  if (cache[path] != null) return cache[path];
+  const r = await fetch(path); if (!r.ok) throw new Error(r.status);
+  return cache[path] = await r.text();
+}
+async function getJSON(url){
+  try { const r = await fetch(url); return r.ok ? await r.json() : null; } catch { return null; }
+}
+
+/* ---------- live data from GitHub (falls back to defaults) ---------- */
+let COMMITS = [];
+const ready = (async () => {
+  const [u, commits] = await Promise.all([
+    getJSON(`https://api.github.com/users/${USER}`),
+    getJSON(`https://api.github.com/repos/${USER}/${REPO}/commits?per_page=100`)
+  ]);
+  if (u) Object.assign(PROFILE, {
+    name: u.name || PROFILE.name, bio: u.bio || PROFILE.bio, location: u.location || PROFILE.location,
+    followers: u.followers, following: u.following, blog: u.blog, company: u.company
+  });
+  if (Array.isArray(commits)) COMMITS = commits.map(c => ({
+    date: new Date(c.commit.author.date), msg: c.commit.message.split("\n")[0], sha: c.sha
+  }));
+  // line counts for cards
+  await Promise.all(REPOS.map(async r => {
+    let n = 0; for (const f of r.files) { try { n += (await getText("projects/" + f)).replace(/\n$/,"").split("\n").length; } catch {} }
+    r.lines = n;
+  }));
+})();
+
+/* ---------- sidebar ---------- */
+function sidebar(){
+  const p = PROFILE;
+  const init = p.name.split(/\s+/).map(w => w[0]).join("").slice(0,2);
+  return `<aside>
+    <div class="avatar"><img src="${esc(p.avatar)}" alt="" onerror="this.replaceWith(document.createTextNode('${esc(init)}'))"></div>
+    <div><h1>${esc(p.name)}</h1><div class="login">${esc(p.login)}</div></div>
+    <div class="rest">
+      <div class="bio">${esc(p.bio)}</div>
+      <a class="btn" href="https://github.com/${USER}" target="_blank" rel="noopener">Follow</a>
+      <ul class="meta">
+        <li>${ICON.people}<span><b>${p.followers}</b> <span class="muted">followers</span> · <b>${p.following}</b> <span class="muted">following</span></span></li>
+        ${p.company ? `<li>${ICON.people}<span>${esc(p.company)}</span></li>` : ""}
+        <li>${ICON.pin}<span>${esc(p.location)}</span></li>
+        <li>${ICON.link}<a href="${GH}">github.com/${USER}/${REPO}</a></li>
+      </ul>
+      <hr>
+      <h2>Languages</h2>
+      <div class="langbar"><span style="flex:1;background:var(--py)"></span></div>
+      <div style="font-size:12px"><span class="dot"></span> <b>Python</b> <span class="muted" style="color:var(--muted)">100%</span></div>
+      <hr>
+      <h2>Topics</h2>
+      <div class="skills">${[...new Set(REPOS.flatMap(r => r.topics))].map(t => `<span class="topic">${esc(t)}</span>`).join("")}</div>
+    </div>
+  </aside>`;
+}
+
+function card(r){
+  return `<div class="card" data-go="#/repo/${r.name}">
+    <div class="head"><span style="display:flex;gap:8px;align-items:center;min-width:0;color:var(--muted)">${ICON.repo}<a href="#/repo/${r.name}">${esc(r.name)}</a></span><span class="label">Public</span></div>
+    <p>${esc(r.desc)}</p>
+    <div class="foot"><span><span class="dot"></span> Python</span><span>${ICON.file} ${r.files.length} file${r.files.length > 1 ? "s" : ""}</span>${r.lines ? `<span>${r.lines} lines</span>` : ""}</div>
+  </div>`;
+}
+
+/* ---------- contribution calendar (real commits to this repo) ---------- */
+const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const key = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+function calendar(year, selMonth){
+  const counts = {};
+  COMMITS.forEach(c => { const k = key(c.date); counts[k] = (counts[k] || 0) + 1; });
+  const yearTotal = COMMITS.filter(c => c.date.getFullYear() === year).length;
+  const start = new Date(year, 0, 1), end = new Date(year, 11, 31);
+  const d = new Date(start); d.setDate(d.getDate() - d.getDay());
+  let cells = "", months = "", col = 0, lastM = -1;
+  while (d <= end || d.getDay() !== 0) {
+    if (d.getDay() === 0) {
+      const m = d < start ? 0 : d.getMonth();
+      months += `<span>${m !== lastM && (d.getDate() <= 7 || col === 0) ? MONTHS[m] : ""}</span>`;
+      if (m !== lastM && (d.getDate() <= 7 || col === 0)) lastM = m;
+      col++;
+    }
+    const inYear = d.getFullYear() === year, n = counts[key(d)] || 0;
+    const lvl = n === 0 ? 0 : n < 2 ? 1 : n < 4 ? 2 : n < 7 ? 3 : 4;
+    const sel = "";
+    cells += `<span class="${inYear ? "" : "out"}${n ? "" : ""}${sel}" data-l="${lvl}" title="${n ? n + " contribution" + (n > 1 ? "s" : "") : "No contributions"} on ${MONTHS[d.getMonth()]} ${d.getDate()}"></span>`;
+    d.setDate(d.getDate() + 1);
+  }
+  return `<h2 class="section">${yearTotal} contribution${yearTotal === 1 ? "" : "s"} in ${year}</h2>
+    <div class="contrib">
+      <div class="months" style="grid-template-columns:repeat(${col},13px)">${months}</div>
+      <div class="calrow"><div class="days"><span></span><span>Mon</span><span></span><span>Wed</span><span></span><span>Fri</span><span></span></div>
+      <div class="cal">${cells}</div></div>
+      <div class="legend"><a href="${GH}/commits/${BRANCH}">Commits to ${USER}/${REPO}</a>
+        <span class="scale">Less <span style="background:var(--c0)"></span><span style="background:var(--c1)"></span><span style="background:var(--c2)"></span><span style="background:var(--c3)"></span><span style="background:var(--c4)"></span> More</span></div>
+    </div>`;
+}
+
+function activity(year, month){
+  const list = COMMITS.filter(c => c.date.getFullYear() === year && c.date.getMonth() === month);
+  const label = `${new Date(year, month).toLocaleString("en", {month: "long"})} <span>${year}</span>`;
+  if (!list.length) return `<div class="month">${label}</div><div class="empty">${ICON.commit} ${esc(PROFILE.login)} has no activity yet for this period.</div>`;
+  return `<div class="month">${label}</div>
+    <div class="tl"><span class="badge">${ICON.commit}</span>
+      <div class="title">Created ${list.length} commit${list.length > 1 ? "s" : ""} in 1 repository</div>
+      <ul>${list.map(c => `<li><a href="${GH}/commit/${c.sha}">${esc(c.msg)}</a><span class="d">${MONTHS[c.date.getMonth()]} ${c.date.getDate()}</span></li>`).join("")}</ul>
+    </div>
+    <div class="tl"><span class="badge">${ICON.repo}</span>
+      <div class="title">Published ${REPOS.length} projects</div>
+      <ul>${REPOS.map(r => `<li><span><span style="color:var(--muted)">${ICON.repo}</span> <a href="#/repo/${r.name}">${esc(r.name)}</a></span><span class="d"><span class="dot"></span> Python</span></li>`).join("")}</ul>
+    </div>`;
+}
+
+/* ---------- views ---------- */
+function overview(params){
+  const now = new Date();
+  const from = params.get("from") ? new Date(params.get("from")) : null;
+  const year = from && !isNaN(from) ? from.getFullYear() : now.getFullYear();
+  const month = from && !isNaN(from) ? from.getMonth() : (year === now.getFullYear() ? now.getMonth() : 11);
+  const years = [...new Set([now.getFullYear(), ...COMMITS.map(c => c.date.getFullYear())])].sort((a,b) => b - a);
+  return sidebar() + `<main>
+    <h2 class="section">Popular repositories</h2>
+    <div class="pinned">${REPOS.map(card).join("")}</div>
+    <div class="contrib-wrap">
+      <div>${calendar(year, month)}
+        <div class="activity"><h2>Contribution activity</h2>${activity(year, month)}</div>
+      </div>
+      <ul class="years">${years.map(y => `<li><a class="${y === year ? "on" : ""}" href="#/?from=${y}-${String(y === now.getFullYear() ? now.getMonth()+1 : 12).padStart(2,"0")}-01">${y}</a></li>`).join("")}</ul>
+    </div>
+  </main>`;
+}
+
+function repositories(q){
+  const t = (q || "").toLowerCase();
+  const list = REPOS.filter(r => !t || (r.name + " " + r.desc + " " + r.topics.join(" ")).toLowerCase().includes(t));
+  return sidebar() + `<main>
+    <div class="filter"><input id="rq" placeholder="Find a repository…" value="${esc(q || "")}"></div>
+    ${list.map(r => `<div class="repo-row">
+      <h3><a href="#/repo/${r.name}">${esc(r.name)}</a><span class="label">Public</span></h3>
+      <p>${esc(r.desc)}</p>
+      <div class="skills" style="margin-bottom:8px">${r.topics.map(x => `<span class="topic">${esc(x)}</span>`).join("")}</div>
+      <div class="foot"><span><span class="dot"></span> Python</span><span>${r.files.map(esc).join(", ")}</span>${r.lines ? `<span>${r.lines} lines</span>` : ""}</div>
+    </div>`).join("") || `<p class="empty">No repositories match “${esc(q)}”.</p>`}
+  </main>`;
+}
+
+function repoView(name, file){
+  const r = REPOS.find(x => x.name === name);
+  if (!r) return `<div class="repo-view"><p class="empty">Repository not found. <a href="#/">Back to overview</a></p></div>`;
+  const f = file && r.files.includes(file) ? file : r.files[0];
+  return `<div class="repo-view">
+    <div class="crumb"><span style="color:var(--muted)">${ICON.repo}</span><a href="#/">${esc(USER)}</a><span style="color:var(--muted)">/</span><b>${esc(r.name)}</b><span class="label">Public</span></div>
+    <p class="repo-desc">${esc(r.desc)}</p>
+    <div class="box">
+      <div class="box-head"><b>${esc(USER)}</b><span class="grow" style="color:var(--muted)">${r.files.length} file${r.files.length > 1 ? "s" : ""} · Python</span>
+        <a class="smallbtn" href="${GH}/tree/${BRANCH}/projects">View on GitHub</a></div>
+      <div class="filelist">${r.files.map(x => `<a href="#/repo/${r.name}/${x}" class="${x === f ? "on" : ""}">${ICON.file}${esc(x)}<span class="sz" data-sz="${x}"></span></a>`).join("")}</div>
+    </div>
+    <div class="box">
+      <div class="box-head"><b>README</b></div>
+      <div class="readme">
+        <h3>${esc(r.name)}</h3>
+        <p>${esc(r.desc)}</p>
+        <ul>${r.notes.map(n => `<li>${esc(n)}</li>`).join("")}</ul>
+        <p><b>Run</b> (Python 3.10+)</p>
+        <pre><code>${r.run.map(esc).join("\n")}</code></pre>
+      </div>
+    </div>
+    <div class="box">
+      <div class="box-head"><b class="grow">${esc(f)}</b><span id="meta" style="color:var(--muted);font-size:12px"></span>
+        <a class="smallbtn" href="projects/${f}" target="_blank">Raw</a><a class="smallbtn" href="projects/${f}" download>Download</a></div>
+      <div class="code" id="code"><div style="padding:16px;color:var(--muted)">Loading…</div></div>
+    </div>
+  </div>`;
+}
+
+async function fillCode(r, f){
+  const el = $("#code"); if (!el) return;
+  try {
+    const src = await getText("projects/" + f);
+    const html = window.hljs ? hljs.highlight(src, {language: "python"}).value : esc(src);
+    // split highlighted HTML into lines, keeping open spans balanced
+    const lines = []; let open = [];
+    html.split("\n").forEach(line => {
+      const prefix = open.join("");
+      const tags = line.match(/<span[^>]*>|<\/span>/g) || [];
+      tags.forEach(t => t.startsWith("</") ? open.pop() : open.push(t));
+      lines.push(prefix + line + "</span>".repeat(open.length));
+    });
+    if (lines.length && lines[lines.length-1] === "") lines.pop();
+    el.innerHTML = `<table>${lines.map((l,i) => `<tr><td class="n">${i+1}</td><td class="l hljs">${l || " "}</td></tr>`).join("")}</table>`;
+    $("#meta").textContent = `${lines.length} lines · ${(new Blob([src]).size/1024).toFixed(1)} KB`;
+  } catch { el.innerHTML = `<div style="padding:16px;color:var(--muted)">Could not load file. <a href="${GH}/blob/${BRANCH}/projects/${f}">Open on GitHub</a></div>`; }
+  for (const x of r.files) {
+    const s = document.querySelector(`[data-sz="${x}"]`);
+    try { if (s) s.textContent = (await getText("projects/" + x)).replace(/\n$/,"").split("\n").length + " lines"; } catch {}
+  }
+}
+
+/* ---------- router ---------- */
+async function route(){
+  await ready;
+  const [path, qs] = (location.hash.slice(1) || "/").split("?");
+  const params = new URLSearchParams(qs || location.search);
+  const parts = path.split("/").filter(Boolean);
+  const tab = parts[0] === "repositories" ? "repositories" : parts[0] === "repo" ? "repositories" : "overview";
+  document.querySelectorAll("nav.tabs a").forEach(a => a.classList.toggle("active", a.dataset.tab === tab));
+  const app = $("#app");
+  app.style.display = parts[0] === "repo" ? "block" : "";
+  if (parts[0] === "repo") {
+    app.innerHTML = repoView(parts[1], parts[2]);
+    document.title = `${USER}/${parts[1]}`;
+    fillCode(REPOS.find(x => x.name === parts[1]) || {files: []}, parts[2] || (REPOS.find(x => x.name === parts[1]) || {files: []}).files[0]);
+  } else if (parts[0] === "repositories") {
+    app.innerHTML = repositories(params.get("q"));
+    document.title = `${USER} (${PROFILE.name}) / Repositories`;
+    const rq = $("#rq");
+    rq.addEventListener("input", () => { history.replaceState(null, "", "#/repositories?q=" + encodeURIComponent(rq.value)); const pos = rq.selectionStart; route().then(() => { const n = $("#rq"); n.focus(); n.setSelectionRange(pos, pos); }); });
+  } else {
+    app.innerHTML = overview(params);
+    document.title = `${USER} (${PROFILE.name})`;
+  }
+  window.scrollTo(0, 0);
+}
+document.addEventListener("click", e => {
+  const c = e.target.closest("[data-go]");
+  if (c && !e.target.closest("a")) location.hash = c.dataset.go;
+});
+$("#ghLink").href = `https://github.com/${USER}?tab=stars`;
+$("#q").addEventListener("keydown", e => { if (e.key === "Enter") location.hash = "#/repositories?q=" + encodeURIComponent(e.target.value); });
+$("#yr").textContent = new Date().getFullYear();
+$("#repoCount").textContent = REPOS.length;
+window.addEventListener("hashchange", route);
+route();
+</script>
+</body>
+</html>
