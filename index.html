@@ -189,18 +189,17 @@ const GH = `https://github.com/${USER}/${REPO}`;
 
 const PROFILE = {
   name: "Ondrej Kutlik", login: USER,
-  bio: "Python projects — games, tools and a poker bot built on probability & EV.",
   avatar: `https://github.com/${USER}.png?size=460`,
-  location: "Czech Republic / Slovakia", linkedin: "https://www.linkedin.com/in/ondrejkutlik/", followers: 0, following: 0
+  location: "Czech Republic / Slovakia", linkedin: "https://www.linkedin.com/in/ondrejkutlik/", email: "kutlikondrej@gmail.com", followers: 0, following: 0
 };
 
 const REPOS = [
   { name: "poker-bot", desc: "Texas Hold'em poker bot that decides using odds and expected value.",
-    files: ["poker_bot.py"], topics: ["poker","monte-carlo","probability","cli"],
+    files: ["poker_bot.py"], topics: ["poker","probability","cli"],
     run: ["python poker_bot.py selftest", "python poker_bot.py analyze --hole AsKd --board QhJc2s --pot 100 --to-call 40", "python poker_bot.py simulate --hands 500 --opponent all"],
     notes: ["Chen formula preflop hand strength and a 1326-combo range table", "Pot odds, EV, MDF, GTO bluff ratio, Kelly fraction, SPR", "Bayesian-smoothed opponent stats (VPIP, PFR, aggression, fold-to-bet)", "Test opponents: Random, Calling station, Maniac, Tight-aggressive"] },
   { name: "piskvorky-5x5", desc: "Five-in-a-row game on a 15×15 board — play vs. computer or a friend.",
-    files: ["piskvorky5x5.py"], topics: ["game","tkinter","gomoku"],
+    files: ["piskvorky5x5.py"], topics: ["game","tkinter"],
     run: ["python piskvorky5x5.py"], notes: ["Computer move scores open and closed runs in all four directions", "Highlights the winning row and the last move"] },
   { name: "kalkulacka", desc: "Simple calculator — command-line and GUI version.",
     files: ["kalkulacka.py","kalkulacka_gui.py"], topics: ["calculator","tkinter","cli"],
@@ -224,6 +223,7 @@ const ICON = {
   people: '<svg class="i" viewBox="0 0 16 16"><path d="M2 5.5a3.5 3.5 0 1 1 5.898 2.549 5.508 5.508 0 0 1 3.034 4.084.75.75 0 1 1-1.482.235 4 4 0 0 0-7.9 0 .75.75 0 0 1-1.482-.236A5.507 5.507 0 0 1 3.102 8.05 3.493 3.493 0 0 1 2 5.5ZM11 4a3.001 3.001 0 0 1 2.22 5.018 5.01 5.01 0 0 1 2.56 3.012.749.749 0 0 1-.885.954.752.752 0 0 1-.549-.514 3.507 3.507 0 0 0-2.522-2.372.75.75 0 0 1-.574-.73v-.352a.75.75 0 0 1 .416-.672A1.5 1.5 0 0 0 11 5.5.75.75 0 0 1 11 4Zm-5.5-.5a2 2 0 1 0-.001 3.999A2 2 0 0 0 5.5 3.5Z"/></svg>',
   pin: '<svg class="i" viewBox="0 0 16 16"><path d="m12.596 11.596-3.535 3.536a1.5 1.5 0 0 1-2.122 0l-3.535-3.536a6.5 6.5 0 1 1 9.192-9.192 6.5 6.5 0 0 1 0 9.192Zm-1.06-8.132v-.001a5 5 0 1 0-7.072 7.072L8 14.07l3.536-3.534a5 5 0 0 0 0-7.072ZM8 9a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 9Z"/></svg>',
   link: '<svg class="i" viewBox="0 0 16 16"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"/></svg>',
+  mail: '<svg class="i" viewBox="0 0 16 16"><path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25v-8.5C0 2.784.784 2 1.75 2ZM1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.809L8.38 9.397a.75.75 0 0 1-.76 0L1.5 5.809v6.442Zm13-8.181v-.32a.25.25 0 0 0-.25-.25H1.75a.25.25 0 0 0-.25.25v.32L8 7.88Z"/></svg>',
   linkedin: '<svg class="i" viewBox="0 0 16 16"><path d="M0 1.15C0 .52.52 0 1.18 0h13.64C15.48 0 16 .52 16 1.15v13.7c0 .63-.52 1.15-1.18 1.15H1.18C.52 16 0 15.48 0 14.85ZM4.94 13.4V6.17h-2.4v7.23ZM3.74 5.18c.84 0 1.36-.56 1.36-1.25-.02-.71-.52-1.25-1.34-1.25-.82 0-1.36.54-1.36 1.25 0 .7.52 1.25 1.33 1.25Zm2.53 8.22h2.4V9.36c0-.21.02-.43.08-.58.17-.43.57-.88 1.23-.88.87 0 1.22.66 1.22 1.63v3.87h2.4V9.25c0-2.22-1.18-3.25-2.76-3.25-1.3 0-1.86.72-2.18 1.21V6.17h-2.4c.03.68 0 7.23 0 7.23Z"/></svg>',
   commit: '<svg class="i" viewBox="0 0 16 16"><path d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"/></svg>'
 };
@@ -246,7 +246,7 @@ const ready = (async () => {
     getJSON(`https://api.github.com/repos/${USER}/${REPO}/commits?per_page=100`)
   ]);
   if (u) Object.assign(PROFILE, {
-    name: u.name || PROFILE.name, bio: u.bio || PROFILE.bio, 
+    name: u.name || PROFILE.name, 
     followers: u.followers, following: u.following, blog: u.blog, company: u.company
   });
   if (Array.isArray(commits)) COMMITS = commits.map(c => ({
@@ -267,13 +267,13 @@ function sidebar(){
     <div class="avatar"><img src="${esc(p.avatar)}" alt="" onerror="this.replaceWith(document.createTextNode('${esc(init)}'))"></div>
     <div><h1>${esc(p.name)}</h1><div class="login">${esc(p.login)}</div></div>
     <div class="rest">
-      <div class="bio">${esc(p.bio)}</div>
       <a class="btn" href="https://github.com/${USER}" target="_blank" rel="noopener">Follow</a>
       <ul class="meta">
         <li>${ICON.people}<span><b>${p.followers}</b> <span class="muted">followers</span> · <b>${p.following}</b> <span class="muted">following</span></span></li>
         ${p.company ? `<li>${ICON.people}<span>${esc(p.company)}</span></li>` : ""}
         <li>${ICON.pin}<span>${esc(p.location)}</span></li>
         <li>${ICON.link}<a href="${GH}">github.com/${USER}/${REPO}</a></li>
+        <li>${ICON.mail}<a href="mailto:${esc(p.email)}">${esc(p.email)}</a></li>
         <li>${ICON.linkedin}<a href="${esc(p.linkedin)}" target="_blank" rel="noopener">in/ondrejkutlik</a></li>
       </ul>
       <hr>
